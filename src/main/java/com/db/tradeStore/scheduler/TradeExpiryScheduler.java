@@ -12,7 +12,7 @@ public class TradeExpiryScheduler {
 	@Autowired
 	TradeStoreService tradeStoreService;
 	
-	@Scheduled(cron="{trade.expiry.job.schedule}")
+	@Scheduled(cron="${trade.expiry.job.schedule}")
 	public void expireTrades(){
 		tradeStoreService.expireTrades();
 	}

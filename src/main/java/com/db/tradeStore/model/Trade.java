@@ -3,6 +3,8 @@ package com.db.tradeStore.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Trade {
+public class Trade implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

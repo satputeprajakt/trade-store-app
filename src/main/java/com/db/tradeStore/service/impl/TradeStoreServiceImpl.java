@@ -111,13 +111,17 @@ public class TradeStoreServiceImpl implements  TradeStoreService {
 	public void expireTrades() {
 		try {
 			// Fetch all trades that are not expired and validate maturity date
-			tradeStoreRepo.findAll().stream().filter(t -> !t.isExpired()).forEach(t -> {
-				if (!validateMaturityDate(t.getMaturityDate())) {
-					// If the trade Maturity Date is less than today's date, set it to expired
-					t.setExpired(true);
-					tradeStoreRepo.save(t);
-				}
-			});
+			List<Trade> allTradeList = tradeStoreRepo.findAll();
+			
+			if (!CollectionUtils.isEmpty(allTradeList)) {
+				allTradeList.stream().filter(t -> !t.isExpired()).forEach(t -> {
+					if (!validateMaturityDate(t.getMaturityDate())) {
+						// If the trade Maturity Date is less than today's date, set it to expired
+						t.setExpired(true);
+						tradeStoreRepo.save(t);
+					}
+				});
+			}
 		} catch (Exception e) {
 			throw new APIException(Constants.TECHNICAL_EXCEPTION, e);
 		}
