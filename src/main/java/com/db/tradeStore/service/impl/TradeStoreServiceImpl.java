@@ -70,9 +70,9 @@ public class TradeStoreServiceImpl implements  TradeStoreService {
 						// Can Insert
 						isVersionValid = true;
 				} else {
-					// Mored than 1 trade with different versions present for the same Id
+					// More than 1 trade with different versions present for the same Id
 					// Get max version for the existing trades
-					int maxExistingTradeVersion = existingTrade.stream().min(Comparator.comparing(Trade::getVersion))
+					int maxExistingTradeVersion = existingTrade.stream().max(Comparator.comparing(Trade::getVersion))
 							.orElseThrow(NoSuchElementException::new).getVersion();
 					
 					if (maxExistingTradeVersion <= trade.getVersion())
